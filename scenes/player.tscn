@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://b2auaomb5ab8h"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_lvf7d"]
+[ext_resource type="Texture2D" uid="uid://bylg6a0dbst1" path="res://assets/textures/player_ship.png" id="1_u73j7"]
+[ext_resource type="AudioStream" uid="uid://bogr02wjr8o0o" path="res://assets/audio/sfx_laser2.wav" id="3_80rgj"]
+
+[sub_resource type="Gradient" id="Gradient_wj1vf"]
+offsets = PackedFloat32Array(0, 0.626911, 0.992355)
+colors = PackedColorArray(0.866667, 0.607843, 0.141176, 0, 0.952941, 0.388235, 0.239216, 1, 1, 0.262745, 0.294118, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wsavw"]
+gradient = SubResource("Gradient_wj1vf")
+
+[sub_resource type="Curve" id="Curve_rwmaq"]
+_data = [Vector2(0, 0.505084), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wk8ah"]
+curve = SubResource("Curve_rwmaq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5qwvg"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 10, 1)
+spread = 30.0
+initial_velocity_min = -200.0
+initial_velocity_max = -200.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_wk8ah")
+color_ramp = SubResource("GradientTexture1D_wsavw")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_73ouh"]
+radius = 21.0
+height = 100.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_lvf7d")
+
+[node name="Flame" type="GPUParticles2D" parent="."]
+position = Vector2(-39, 0)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_5qwvg")
+lifetime = 0.3
+randomness = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_u73j7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 1)
+shape = SubResource("CapsuleShape2D_73ouh")
+
+[node name="RocketContainer" type="Node" parent="."]
+
+[node name="Laser" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_80rgj")

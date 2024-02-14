@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1ts8wojw1hj7"]
+
+[ext_resource type="FontFile" uid="uid://cds7u5tirwt5f" path="res://assets/font/Kenney Blocks.ttf" id="1_0m5v2"]
+[ext_resource type="Script" path="res://scripts/score.gd" id="1_lu783"]
+[ext_resource type="Texture2D" uid="uid://d1py23ywo618s" path="res://assets/textures/orb.png" id="3_2sly7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wmbrp"]
+font = ExtResource("1_0m5v2")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_kba6a"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ehny"]
+font = ExtResource("1_0m5v2")
+font_size = 52
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lu783")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 20.0
+offset_right = 346.0
+offset_bottom = 92.0
+text = "SCORE: 999"
+label_settings = SubResource("LabelSettings_wmbrp")
+
+[node name="HealthTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 94.0
+offset_right = 145.0
+offset_bottom = 212.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_2sly7")
+
+[node name="X" type="Label" parent="."]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 100.0
+offset_right = 130.0
+offset_bottom = 155.0
+text = "x
+"
+label_settings = SubResource("LabelSettings_kba6a")
+
+[node name="Health" type="Label" parent="."]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 88.0
+offset_right = 164.0
+offset_bottom = 166.0
+text = "3"
+label_settings = SubResource("LabelSettings_2ehny")
